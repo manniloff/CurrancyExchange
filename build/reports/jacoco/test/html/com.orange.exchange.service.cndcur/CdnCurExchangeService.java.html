@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CdnCurExchangeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CurrancyExchange</a> &gt; <a href="index.source.html" class="el_package">com.orange.exchange.service.cndcur</a> &gt; <span class="el_source">CdnCurExchangeService.java</span></div><h1>CdnCurExchangeService.java</h1><pre class="source lang-java linenums">package com.orange.exchange.service.cndcur;
+
+import com.orange.api.CurrenÑ�ÑƒRateService;
+import com.orange.api.GlobalCurrencyRateDto;
+import com.orange.api.cdncur.model.CdnCurCurrenÑ�ÑƒRate;
+import com.orange.exchange.dto.GlobalExchangeDto;
+import com.orange.exchange.model.ExchangeHistory;
+import com.orange.exchange.service.ExchangeHistoryService;
+import com.orange.exchange.service.GlobalExchangeService;
+import com.orange.util.dto.CurrencyRateInfo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L20">@RequiredArgsConstructor</span>
+public class CdnCurExchangeService implements GlobalExchangeService {
+    private final CurrenÑ�ÑƒRateService&lt;CdnCurCurrenÑ�ÑƒRate, GlobalCurrencyRateDto&gt; cdnCurCurrencyRateService;
+    private final ExchangeHistoryService exchangeHistoryService;
+
+    @Override
+    public double exchangeCurrency(GlobalExchangeDto exchange) {
+<span class="fc" id="L27">        DecimalFormat doubleFormat = new DecimalFormat(&quot;#.##&quot;);</span>
+
+<span class="fc" id="L29">        CurrencyRateInfo currencyRateInfo = new CurrencyRateInfo();</span>
+<span class="fc" id="L30">        currencyRateInfo.setCurrencyFrom(exchange.getFrom());</span>
+<span class="fc" id="L31">        currencyRateInfo.setCurrencyTo(exchange.getTo());</span>
+<span class="fc" id="L32">        currencyRateInfo.setDate(LocalDate.now());</span>
+
+<span class="fc" id="L34">        Optional&lt;GlobalCurrencyRateDto&gt; currencyRate = cdnCurCurrencyRateService.getCurrencyRateInfo(currencyRateInfo);</span>
+
+<span class="fc" id="L36">        double retrievedValue = currencyRate.map(globalCurrencyRateDto -&gt;</span>
+<span class="fc" id="L37">                Double.parseDouble(doubleFormat.format(exchange.getCount() / globalCurrencyRateDto.getRate()))).orElse(0.0);</span>
+
+<span class="fc" id="L39">        ExchangeHistory exchangeHistory = new ExchangeHistory();</span>
+<span class="fc" id="L40">        exchangeHistory.setChangeFrom(exchange.getFrom());</span>
+<span class="fc" id="L41">        exchangeHistory.setChangeTo(exchange.getTo());</span>
+<span class="fc" id="L42">        exchangeHistory.setChangedValue(exchange.getCount());</span>
+<span class="fc" id="L43">        exchangeHistory.setRetrievedValue(retrievedValue);</span>
+<span class="fc" id="L44">        exchangeHistory.setTransactionDate(LocalDateTime.now().withNano(0));</span>
+
+<span class="fc" id="L46">        exchangeHistoryService.create(exchangeHistory);</span>
+
+<span class="fc" id="L48">        return retrievedValue;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

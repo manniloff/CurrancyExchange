@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExchangeHistoryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CurrancyExchange</a> &gt; <a href="index.source.html" class="el_package">com.orange.exchange.service</a> &gt; <span class="el_source">ExchangeHistoryService.java</span></div><h1>ExchangeHistoryService.java</h1><pre class="source lang-java linenums">package com.orange.exchange.service;
+
+import com.orange.exchange.model.ExchangeHistory;
+import com.orange.exchange.repository.ExchangeHistoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+<span class="fc" id="L12">@RequiredArgsConstructor</span>
+public class ExchangeHistoryService {
+    private final ExchangeHistoryRepository exchangeHistoryRepository;
+
+    public List&lt;ExchangeHistory&gt; findAll() {
+<span class="fc" id="L17">        return exchangeHistoryRepository.findAll();</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByTransactionDate(LocalDateTime transactionDate) {
+<span class="fc" id="L21">        return exchangeHistoryRepository.findAllByTransactionDate(transactionDate);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByChangeFrom(String changeFrom) {
+<span class="fc" id="L25">        return exchangeHistoryRepository.findAllByChangeFrom(changeFrom);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByChangeTo(String changeTo) {
+<span class="fc" id="L29">        return exchangeHistoryRepository.findAllByChangeTo(changeTo);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByChangeFromTransactionDate(String changeFrom, LocalDateTime transactionDate) {
+<span class="fc" id="L33">        return exchangeHistoryRepository.findAllByChangeFromAndTransactionDate(changeFrom, transactionDate);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByChangeToTransactionDate(String changeTo, LocalDateTime transactionDate) {
+<span class="fc" id="L37">        return exchangeHistoryRepository.findAllByChangeToAndTransactionDate(changeTo, transactionDate);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByChangeFromTo(String exchangeFrom, String exchangeTo) {
+<span class="nc" id="L41">        return exchangeHistoryRepository.findAllByChangeFromAndChangeTo(exchangeFrom,exchangeTo);</span>
+    }
+
+    public List&lt;ExchangeHistory&gt; findAllByPeriod(LocalDateTime transactionDateFrom, LocalDateTime transactionDateTo) {
+<span class="nc" id="L45">        return exchangeHistoryRepository.findAllByTransactionDateBetween(transactionDateFrom, transactionDateTo);</span>
+    }
+
+    public void create(ExchangeHistory exchangeHistory) {
+<span class="fc" id="L49">        exchangeHistoryRepository.save(exchangeHistory);</span>
+<span class="fc" id="L50">    }</span>
+
+    public void clear() {
+<span class="nc" id="L53">        exchangeHistoryRepository.deleteAll();</span>
+<span class="nc" id="L54">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

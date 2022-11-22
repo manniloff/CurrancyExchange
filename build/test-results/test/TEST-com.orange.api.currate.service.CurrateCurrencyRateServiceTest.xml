@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.orange.api.currate.service.CurrateCurrencyRateServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-11-22T16:26:47" hostname="MDMOB40671" time="0.522">
+  <properties/>
+  <testcase name="create()" classname="com.orange.api.currate.service.CurrateCurrencyRateServiceTest" time="0.223"/>
+  <testcase name="exists()" classname="com.orange.api.currate.service.CurrateCurrencyRateServiceTest" time="0.132"/>
+  <testcase name="getCurrencyRateInfo()" classname="com.orange.api.currate.service.CurrateCurrencyRateServiceTest" time="0.161"/>
+  <system-out><![CDATA[2022-11-22 18:26:47.651  INFO 34248 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.orange.api.currate.service.CurrateCurrencyRateServiceTest], using SpringBootContextLoader
+2022-11-22 18:26:47.652  INFO 34248 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.orange.api.currate.service.CurrateCurrencyRateServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-11-22 18:26:47.670  INFO 34248 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.orange.api.currate.service.CurrateCurrencyRateServiceTest]: CurrateCurrencyRateServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-11-22 18:26:47.720  INFO 34248 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.orange.Application for test class com.orange.api.currate.service.CurrateCurrencyRateServiceTest
+2022-11-22 18:26:47.723  INFO 34248 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-11-22 18:26:47.728  INFO 34248 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3d75e976, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f2da372, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@75c6032f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7587fa5b, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@67ab93c4, org.springframework.test.context.support.DirtiesContextTestExecutionListener@15ef9a70, org.springframework.test.context.transaction.TransactionalTestExecutionListener@50f53c99, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1aea51fe, org.springframework.test.context.event.EventPublishingTestExecutionListener@21e4c4d4, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@48b1f682, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@31d90af9, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@7974d89d, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7e317103, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@39738da1, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4084d6b4]
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: delete from currate_currency_rate where id=?
+Hibernate: select count(curratecur0_.id) as col_0_0_ from currate_currency_rate curratecur0_ where curratecur0_.retrieved_date=?
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: insert into currate_currency_rate (label, rate, retrieved_date) values (?, ?, ?)
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_ where (curratecur0_.label like ? escape ?) and curratecur0_.retrieved_date=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_ where (curratecur0_.label like ? escape ?) and curratecur0_.retrieved_date=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_ where (curratecur0_.label like ? escape ?) and curratecur0_.retrieved_date=?
+Hibernate: select curratecur0_.id as id1_1_, curratecur0_.label as label2_1_, curratecur0_.rate as rate3_1_, curratecur0_.retrieved_date as retrieve4_1_ from currate_currency_rate curratecur0_ where (curratecur0_.label like ? escape ?) and curratecur0_.retrieved_date=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

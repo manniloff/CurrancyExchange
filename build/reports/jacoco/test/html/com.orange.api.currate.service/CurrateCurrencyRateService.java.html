@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrateCurrencyRateService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CurrancyExchange</a> &gt; <a href="index.source.html" class="el_package">com.orange.api.currate.service</a> &gt; <span class="el_source">CurrateCurrencyRateService.java</span></div><h1>CurrateCurrencyRateService.java</h1><pre class="source lang-java linenums">package com.orange.api.currate.service;
+
+import com.orange.api.GlobalCurrencyRateDto;
+import com.orange.api.currate.model.CurrateCurrencyRate;
+import com.orange.api.currate.repository.CurrateCurrencyRateRepository;
+import com.orange.api.CurrenÑ�ÑƒRateService;
+import com.orange.util.dto.CurrencyRateInfo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+@Primary
+@Service
+<span class="fc" id="L19">@RequiredArgsConstructor</span>
+public class CurrateCurrencyRateService implements CurrenÑ�ÑƒRateService&lt;CurrateCurrencyRate,GlobalCurrencyRateDto&gt; {
+    private final CurrateCurrencyRateRepository currateCurrencyRateRepository;
+
+    @Override
+    @Transactional
+    public void create(List&lt;CurrateCurrencyRate&gt; currencyRates) {
+<span class="fc" id="L26">        LocalDate currentDate = LocalDate.now();</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if(exists(currentDate)){</span>
+<span class="fc" id="L28">            currateCurrencyRateRepository.deleteAllByRetrievedDate(currentDate);</span>
+        }
+<span class="fc" id="L30">        currateCurrencyRateRepository.saveAll(currencyRates);</span>
+<span class="fc" id="L31">    }</span>
+
+    @Override
+    public boolean exists(LocalDate retrievedDate) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        return currateCurrencyRateRepository.countAllByRetrievedDate(retrievedDate) &gt; 0;</span>
+    }
+
+    @Override
+    public Optional&lt;GlobalCurrencyRateDto&gt; getCurrencyRateInfo(CurrencyRateInfo data) {
+<span class="fc" id="L40">        Optional&lt;CurrateCurrencyRate&gt; getCurrencyRateInfo = currateCurrencyRateRepository</span>
+<span class="fc" id="L41">                .findByLabelContainsAndRetrievedDate(data.getCurrencyFrom() + data.getCurrencyTo(), data.getDate());</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(getCurrencyRateInfo.isPresent()) {</span>
+<span class="fc" id="L44">            GlobalCurrencyRateDto currateCurrencyRateDto = new GlobalCurrencyRateDto();</span>
+<span class="fc" id="L45">            currateCurrencyRateDto.setLabel(getCurrencyRateInfo.get().getLabel());</span>
+<span class="fc" id="L46">            currateCurrencyRateDto.setRate(getCurrencyRateInfo.get().getRate());</span>
+<span class="fc" id="L47">            currateCurrencyRateDto.setRetrievedDate(getCurrencyRateInfo.get().getRetrievedDate());</span>
+
+<span class="fc" id="L49">            return Optional.of(currateCurrencyRateDto);</span>
+        }
+<span class="fc" id="L51">        return Optional.empty();</span>
+    }
+
+    @Override
+    public List&lt;CurrateCurrencyRate&gt; getRate() {
+<span class="fc" id="L56">        return currateCurrencyRateRepository.findAll();</span>
+    }
+
+    public void clear() {
+<span class="fc" id="L60">        currateCurrencyRateRepository.deleteAll();</span>
+<span class="fc" id="L61">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

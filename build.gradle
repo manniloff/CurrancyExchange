@@ -1,0 +1,94 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id 'org.barfuin.gradle.jacocolog' version '1.0.1'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    //Spring
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    //testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    //testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    //GSON
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
+
+    //MySql
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.31'
+    testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.17.5'
+
+    //DB Version Control
+    implementation group: 'org.flywaydb', name: 'flyway-core', version: '7.10.0'
+
+    //Security
+
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.5'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.7.5'
+    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.7.5'
+
+    //JWT
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    //Feign
+    //implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version: '1.4.7.RELEASE'
+}
+
+task runTestsInTestContainers {
+    doFirst {
+        println 'Setup Test Containers'
+        project.ext.jvmArgs = "-Dspring.profiles.active=testcontainers-mysql"
+    }
+
+    finalizedBy test
+}
+
+test {
+    doFirst {
+        if (project.hasProperty('jvmArgs')) {
+            println 'Set custom jvmArgs: ' + project.ext.jvmArgs
+            jvmArgs "-Dspring.profiles.active=testcontainers-mysql"
+        }
+    }
+
+    testLogging {
+        events "failed"
+        exceptionFormat "full"
+    }
+
+    useJUnitPlatform()
+}
+
+bootJar {
+    archiveFileName = "currency-exchange.jar"
+}
+
+//Setup JaCoCo
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}

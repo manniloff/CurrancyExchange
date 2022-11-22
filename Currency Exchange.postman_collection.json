@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "74811dfe-3994-4f37-8d21-412f29bb36d7",
+		"name": "Currency Exchange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8461360"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Retrive Rate",
+					"item": [
+						{
+							"name": "Retrive rates for currency",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/rate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"rate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exchange History",
+					"item": [
+						{
+							"name": "Get Exchange History",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exhcange History by \"From\"",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/from/MDL",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"from",
+										"MDL"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Echange History by \"To\"",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/to/EUR",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"to",
+										"EUR"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Echange History by Transaction Date",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/transaction/date?transactionDate=2022-11-22T17:46:57",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"transaction",
+										"date"
+									],
+									"query": [
+										{
+											"key": "transactionDate",
+											"value": "2022-11-22T17:46:57"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exchange History by \"From\" and Date",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/from/date?exchangeFrom=MDL&transactionDate=2022-11-22T17:46:57",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"from",
+										"date"
+									],
+									"query": [
+										{
+											"key": "exchangeFrom",
+											"value": "MDL"
+										},
+										{
+											"key": "transactionDate",
+											"value": "2022-11-22T17:46:57"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exchange History by \"To\" and Date",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/to/date?exchangeTo=EUR&transactionDate=2022-11-22T17:46:57",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"to",
+										"date"
+									],
+									"query": [
+										{
+											"key": "exchangeTo",
+											"value": "EUR"
+										},
+										{
+											"key": "transactionDate",
+											"value": "2022-11-22T17:46:57"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exchange History by \"From\" and \"To\"",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/fromto?exchangeFrom=MDL&exchangeTo=EUR",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"fromto"
+									],
+									"query": [
+										{
+											"key": "exchangeFrom",
+											"value": "MDL"
+										},
+										{
+											"key": "exchangeTo",
+											"value": "EUR"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exchange History by period",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2OTE0NTM5NCwiaWF0IjoxNjY5MTA5Mzk0fQ.JGd2wzRUm_8fwQAOKoLncNLOWiZtMF730HJMkoEplag",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9999/exchange/history/period?transactionDateFrom=2022-11-22T10:00:00&transactionDateTo=2022-11-23T01:00:00",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"exchange",
+										"history",
+										"period"
+									],
+									"query": [
+										{
+											"key": "transactionDateFrom",
+											"value": "2022-11-22T10:00:00"
+										},
+										{
+											"key": "transactionDateTo",
+											"value": "2022-11-23T01:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CdnCur.com exchange",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"MDL\",\r\n    \"to\": \"EUR\",\r\n    \"count\": \"1985\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/exchange/cdncur",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"exchange",
+						"cdncur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currate.com exchange",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"MDL\",\r\n    \"to\": \"EUR\",\r\n    \"count\": \"1985.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/exchange/currate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"exchange",
+						"currate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ger Rates from CdnCur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/rate/cdncur",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"rate",
+						"cdncur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rates from Currate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/rate/currate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"rate",
+						"currate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

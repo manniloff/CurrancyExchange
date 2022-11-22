@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CurrancyExchange</a> &gt; <a href="index.source.html" class="el_package">com.orange.auth.util</a> &gt; <span class="el_source">JwtUtil.java</span></div><h1>JwtUtil.java</h1><pre class="source lang-java linenums">package com.orange.auth.util;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+@Service
+<span class="fc" id="L16">public class JwtUtil {</span>
+<span class="fc" id="L17">    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);</span>
+<span class="fc" id="L18">    private String SECRET_KEY = &quot;com1990orange2016web2019secret2022key078864796&quot;;</span>
+
+    public String extractUsername(String token) {
+<span class="nc" id="L21">        LOGGER.info(&quot;Extracting username&quot;);</span>
+<span class="nc" id="L22">        return extractClaim(token, Claims::getSubject);</span>
+    }
+
+    public Date extractExpiration(String token) {
+<span class="nc" id="L26">        LOGGER.info(&quot;Extracting token expiration&quot;);</span>
+<span class="nc" id="L27">        return extractClaim(token, Claims::getExpiration);</span>
+    }
+
+    public &lt;T&gt; T extractClaim(String token, Function&lt;Claims, T&gt; claimsResolver) {
+<span class="nc" id="L31">        LOGGER.info(&quot;Extracting claim&quot;);</span>
+<span class="nc" id="L32">        final Claims claims = extractAllClaims(token);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        return claims != null ? claimsResolver.apply(claims) : null;</span>
+    }
+
+    private Claims extractAllClaims(String token) {
+<span class="nc" id="L37">        LOGGER.info(&quot;Extracting all claims&quot;);</span>
+        try {
+<span class="nc" id="L39">            return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();</span>
+<span class="nc" id="L40">        } catch (ExpiredJwtException e){</span>
+<span class="nc" id="L41">            LOGGER.error(e.getMessage());</span>
+        }
+<span class="nc" id="L43">        return null;</span>
+    }
+
+    private Boolean isTokenExpired(String token) {
+<span class="nc" id="L47">        LOGGER.info(&quot;Extracting token expiration&quot;);</span>
+<span class="nc" id="L48">        return extractExpiration(token).before(new Date());</span>
+    }
+
+    public String generateToken(UserDetails userDetails) {
+<span class="nc" id="L52">        Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L53">        LOGGER.info(&quot;Generating token&quot;);</span>
+<span class="nc" id="L54">        return createToken(claims, userDetails.getUsername());</span>
+    }
+
+    private String createToken(Map&lt;String, Object&gt; claims, String subject) {
+<span class="nc" id="L58">        LOGGER.info(&quot;Creating token&quot;);</span>
+<span class="nc" id="L59">        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))</span>
+<span class="nc" id="L60">                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))</span>
+<span class="nc" id="L61">                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();</span>
+    }
+
+    public Boolean validateToken(String token, UserDetails userDetails) {
+<span class="nc" id="L65">        final String username = extractUsername(token);</span>
+<span class="nc" id="L66">        LOGGER.info(&quot;Validating token&quot;);</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        return (username.equals(userDetails.getUsername()) &amp;&amp; !isTokenExpired(token));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

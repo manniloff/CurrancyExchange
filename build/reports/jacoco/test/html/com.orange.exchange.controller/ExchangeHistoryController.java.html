@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExchangeHistoryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CurrancyExchange</a> &gt; <a href="index.source.html" class="el_package">com.orange.exchange.controller</a> &gt; <span class="el_source">ExchangeHistoryController.java</span></div><h1>ExchangeHistoryController.java</h1><pre class="source lang-java linenums">package com.orange.exchange.controller;
+
+import com.orange.exchange.service.ExchangeHistoryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
+
+@Controller
+@RequestMapping(&quot;/exchange/history&quot;)
+<span class="fc" id="L17">@RequiredArgsConstructor</span>
+public class ExchangeHistoryController {
+    private final ExchangeHistoryService exchangeHistoryService;
+
+    @GetMapping(value = {&quot;&quot;, &quot;/&quot;}, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getAll() {
+<span class="nc" id="L23">        return ResponseEntity.ok(exchangeHistoryService.findAll());</span>
+    }
+
+    @GetMapping(value = &quot;/from/{exchangeFrom}&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByExchangeFrom(@PathVariable String exchangeFrom) {
+<span class="nc" id="L28">        return ResponseEntity.ok(exchangeHistoryService.findAllByChangeFrom(exchangeFrom));</span>
+    }
+
+    @GetMapping(value = &quot;/to/{exchangeTo}&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByExchangeTo(@PathVariable String exchangeTo) {
+<span class="nc" id="L33">        return ResponseEntity.ok(exchangeHistoryService.findAllByChangeTo(exchangeTo));</span>
+    }
+
+    @GetMapping(value = &quot;/from/date&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByExchangeFromAndTransactionDate(@RequestParam String exchangeFrom,
+                                                                 @RequestParam @DateTimeFormat(pattern=&quot;yyyy-MM-dd'T'HH:mm:ss&quot;) LocalDateTime transactionDate) {
+<span class="nc" id="L39">        return ResponseEntity.ok(exchangeHistoryService.findAllByChangeFromTransactionDate(exchangeFrom, transactionDate));</span>
+    }
+
+    @GetMapping(value = &quot;/to/date&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByExchangeToAndTransactionDate(@RequestParam String exchangeTo,
+                                                               @RequestParam @DateTimeFormat(pattern=&quot;yyyy-MM-dd'T'HH:mm:ss&quot;) LocalDateTime transactionDate) {
+<span class="nc" id="L45">        return ResponseEntity.ok(exchangeHistoryService.findAllByChangeToTransactionDate(exchangeTo, transactionDate));</span>
+    }
+
+    @GetMapping(value = &quot;/transaction/date&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByTransactionDate(@RequestParam @DateTimeFormat(pattern=&quot;yyyy-MM-dd'T'HH:mm:ss&quot;) LocalDateTime transactionDate) {
+<span class="nc" id="L50">        return ResponseEntity.ok(exchangeHistoryService.findAllByTransactionDate(transactionDate));</span>
+    }
+
+    @GetMapping(value = &quot;/fromto&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByExchangeFromTo(@RequestParam String exchangeFrom, @RequestParam String exchangeTo) {
+<span class="nc" id="L55">        return ResponseEntity.ok(exchangeHistoryService.findAllByChangeFromTo(exchangeFrom, exchangeTo));</span>
+    }
+
+    @GetMapping(value = &quot;/period&quot;, produces = &quot;application/json&quot;)
+    public ResponseEntity&lt;?&gt; getByTransactionDates(@RequestParam @DateTimeFormat(pattern=&quot;yyyy-MM-dd'T'HH:mm:ss&quot;) LocalDateTime transactionDateFrom,
+                                                  @RequestParam @DateTimeFormat(pattern=&quot;yyyy-MM-dd'T'HH:mm:ss&quot;) LocalDateTime transactionDateTo) {
+<span class="nc" id="L61">        return ResponseEntity.ok(exchangeHistoryService.findAllByPeriod(transactionDateFrom, transactionDateTo));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
